@@ -4,10 +4,10 @@ import java.util.Date;
 
 public abstract class Veiculo {
     private int hora;
-        //private Pessoa proprietario;
-        private String placa;
-        private String modelo;
-        private Tipo tipo;
+    //private Pessoa proprietario;
+    private String placa;
+    private String modelo;
+    private Tipo tipo;
         
         /**
          *  @SuppressWarnings("deprecation")

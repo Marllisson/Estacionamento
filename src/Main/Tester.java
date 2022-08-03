@@ -98,6 +98,7 @@ public class Tester {
                     System.out.println("Saída de Veículo: ");
                     System.out.println("------");
                     scan.nextLine();
+                    
                     System.out.println("Informar placa");
                     placaSaida=scan.nextLine();
 
@@ -106,6 +107,7 @@ public class Tester {
 
                     System.out.print("Valor a pagar: R$");
                     System.out.println(estacionamento.saiVeiculo("QWE 2222"));
+                    
                     break;
 
                 case 3:
