@@ -15,7 +15,7 @@ public class Estacionamento {
         }
         
         public int getNumMoto(){
-            return;
+            return numMoto;
         }
 
         public boolean entraVeiculo(String placa, String modelo, Tipo tipo){
