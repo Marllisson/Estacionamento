@@ -22,47 +22,30 @@ public class Estacionamento {
         public void setNumCarro(int numero){
             this.numCarro = numero;
         }
+                public void setNumMoto(int numero){
+            this.numCarro = numero;
+        }
         
         public void incrementaCarro(){
             setNumCarro(getNumCarro()+1);
         }
-        
-        public void setNumMoto(int numero){
-            this.numCarro = numero;
+                
+        public void decrementaCarro(){
+            setNumCarro(getNumCarro()-1);
         }
-        
+                
         public void incrementaMoto(){
             setNumMoto(getNumMoto()+1);
+        }
+
+        public void decrementaMoto(){
+            setNumCarro(getNumCarro()-1);
         }
             
         
 
         public boolean entraVeiculo(String placa, String modelo, Tipo tipo){
-            /**
-             *  for (int a=0; a < this.vaga.length; a++){
-                if (tipo.equals(Tipo.CARRO)){
-                    Automovel carro = new Automovel(placa, modelo, Tipo.CARRO);
-                    if (this.vaga[a][0] == null && this.vaga[a][1] == null){
-                        this.vaga[a][0] = carro;
-                        nrVeiculos++;
-                        return true;
-                    }
-                } else {
-                    Motocicleta moto = new Motocicleta(placa, modelo, Tipo.MOTO);
-                    if (this.vaga[a][0] == null){
-                        this.vaga[a][0] = moto;
-                        nrVeiculos++;
-                        return true;
-                    } else if (this.vaga[a][0].getTipo().equals(Tipo.MOTO)){
-                        if (this.vaga[a][1] == null){
-                            this.vaga[a][1] = moto;
-                            nrVeiculos++;
-                            return true;
-                        }
-                    }
-                }
-            }
-             */
+            
             //Inserindo Carro no estacionamento
             if(tipo.equals(Tipo.CARRO)){//Avalia se o veículo é um carro
                 if(getNumCarro()<vagaCarro.length){
@@ -80,7 +63,7 @@ public class Estacionamento {
                     return false;
             }
                 //Inserindo moto
-                }if(tipo.equals(Tipo.MOTO)){//Avalia se o veículo é uma Moto
+                }else if(tipo.equals(Tipo.MOTO)){//Avalia se o veículo é uma Moto
                 if(getNumCarro()<vagaMoto.length){
                   Automovel moto = new Automovel(placa, modelo, Tipo.MOTO);
                   for(int m=0; m <this.vagaMoto.length; m++){
@@ -89,17 +72,25 @@ public class Estacionamento {
                         incrementaMoto();
                         return true;
                        }
-                }
+                    }
                    
                    }
                 
+                }
+                
+                return false;
 
-            return false;
+            
         }
 
-        private void removeVeiculo(int p){
-            this.vaga[g][l] = null;
-            nrVeiculos--;
+        private void removeVeiculo(int posicao, int codTipo){
+            if (codTipo == 1 ){
+                this.vagaCarro[posicao] = null;
+                decrementaCarro();
+            }else{
+                this.vagaMoto[posicao] = null;
+                decrementaMoto();
+            }
         }
 
         private float calculaConta(int g, int l){
@@ -121,17 +112,21 @@ public class Estacionamento {
         public float saiVeiculo(String placa){
             float conta = 0;
             
-            for (int a=0; a < this.vaga.length; a++){
-                if (this.vaga[a][0] != null){
-                    if (placa.equals(this.vaga[a][0].getPlaca())){
-                        conta = calculaConta(a, 0);
-                        removeVeiculo(a, 0);
+            for (int a=0; a < this.vagaCarro.length; a++){
+                if (this.vagaCarro[a] != null){
+                    if (placa.equals(this.vagaCarro[a].getPlaca())){
+                        conta = calculaConta(a);
+                        removeVeiculo(a, 1);
                         return conta;
                     }
-                } else if (this.vaga[a][1] != null){
-                    if (placa.equals(this.vaga[a][1].getPlaca())){
-                        conta = calculaConta(a, 1);
-                        removeVeiculo(a, 1);
+                } 
+            }
+            
+            for (int m=0; m < this.vagaMoto.length; m++){
+                if (this.vagaMoto[m] != null){
+                    if (placa.equals(this.vagaMoto[m].getPlaca())){
+                        conta = calculaConta(m);
+                        removeVeiculo(m, 2);
                         return conta;
                     }
                 }
@@ -141,14 +136,21 @@ public class Estacionamento {
 
         public ArrayList<Veiculo> listaEstacionados(){
             ArrayList<Veiculo> lista = new ArrayList<>();
-            for (int a=0; a < this.vaga.length; a++){
-                if (this.vaga[a][0] != null){
-                    lista.add(this.vaga[a][0]);
+            for (int a=0; a < this.vagaCarro.length; a++){
+                if (this.vagaCarro[a] != null){
+                    lista.add(this.vagaCarro[a]);
                 }
-                if (this.vaga[a][1] != null){
-                    lista.add(this.vaga[a][1]);
+
+            }
+            
+            for(int m=0; m < this.vagaMoto.length; m++){
+                 if (this.vagaMoto[m] != null){
+                    lista.add(this.vagaMoto[m]);
                 }
             }
+            
             return lista;
         }
 }
+           
+
