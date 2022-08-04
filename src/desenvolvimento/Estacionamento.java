@@ -82,6 +82,8 @@ public class Estacionamento {
 
             
         }
+        
+
 
         private void removeVeiculo(int posicao, int codTipo){
             if (codTipo == 1 ){

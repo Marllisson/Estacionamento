@@ -40,9 +40,9 @@ public class Tester {
                     String placaEntrada, modelo;
                     String tipo = "";
                     int opcao;
-                    boolean flag;
+                    boolean flagPlaca, flagTipo;
                     
-                    flag=false;
+                    flagPlaca=false;
                     do{
                         //Área que recebe a placa e verifica se está em conformidade
                     scan.nextLine();
@@ -55,20 +55,18 @@ public class Tester {
                     placaEntrada = placaEntrada.toUpperCase();
                     //Validado simples para avaliar apenas o tamanho da placa
                     if(placaEntrada.length() == 7 ){
-                        flag=true;
+                        flagPlaca=true;
                         System.out.println("Placa está OK");
                     }else if (placaEntrada.length() < 7 || placaEntrada.length() > 7){
-                        flag=false;
+                        flagPlaca=false;
                         System.out.println("Erro Placa nformada fora do padrão especificado LLLNNNN");
                     }
                     
-                    }while(!flag);
+                    }while(!flagPlaca);
                     
+                    //Solicita o tipo do veículo
                     
-                    System.out.println("Informe Modelo: ");
-                    modelo = scan.nextLine();
-                    
-                    flag=false;
+                    flagTipo=false;
                     do{
                     System.out.println("Tipo do Veículo digite ");
                     System.out.println("1 - CARRO");
@@ -77,18 +75,23 @@ public class Tester {
                     opcao = scan.nextInt();
                     if(opcao == 1 )  {
                         tipo = "CARRO";
-                        flag = true;
-                    }if(opcao == 2){
+                        flagTipo = true;
+                    }else if(opcao == 2){
                         tipo = "MOTO";
-                        flag = true;
+                        flagTipo = true;
                     }else{
                         System.out.println("");
                         System.out.println("Opção inválida Digite 1=CARRO e 2=MOTO");
                         System.out.println("");
                     }
-                    }while(!flag);
-                  
-
+                    }while(!flagTipo);
+                    
+                    //Solicita modelo do veículo
+                    scan.nextLine();
+                    System.out.println("Informe Modelo: ");
+                    modelo = scan.nextLine();
+                    modelo = modelo.toUpperCase();
+                    
                     System.out.println(estacionamento.entraVeiculo(placaEntrada,modelo, Tipo.valueOf(tipo)));
                     break;
 
@@ -101,12 +104,14 @@ public class Tester {
                     
                     System.out.println("Informar placa");
                     placaSaida=scan.nextLine();
+                    placaSaida = placaSaida.toUpperCase();
+                    
 
                     Calendar c = Calendar.getInstance();
                     System.out.println("Data/Hora atual: "+c.getTime());
 
                     System.out.print("Valor a pagar: R$");
-                    System.out.println(estacionamento.saiVeiculo("QWE 2222"));
+                    System.out.println(estacionamento.saiVeiculo(placaSaida));
                     
                     break;
 
