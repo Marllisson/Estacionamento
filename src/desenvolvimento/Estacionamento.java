@@ -149,6 +149,27 @@ public class Estacionamento {
             }
             return conta;
         }
+        
+        public void pesquisaVeiculo(String placa){
+           
+            String placaPesquisa = placa;
+            int tempo = 0;
+            
+            for(int a=0; a < vagaCarro.length; a++){
+                if(placaPesquisa.equals(vagaCarro[a])){
+                    tempo = vagaCarro[a].getHora();
+                }
+            }
+            
+            for(int m=0; m < vagaMoto.length; m++){
+                if(placaPesquisa.equals(vagaMoto[m])){
+                    tempo = vagaMoto[m].getHora();
+                }
+            }
+            
+            System.out.println(tempo);
+            
+        }
 
         public ArrayList<Veiculo> listaEstacionados(){
             ArrayList<Veiculo> lista = new ArrayList<>();

@@ -2,6 +2,7 @@
 package Main;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 import conexoes.ConexaoBD;
 
@@ -93,7 +94,8 @@ public class Tester {
                     modelo = modelo.toUpperCase();
                     
                     System.out.println(estacionamento.entraVeiculo(placaEntrada,modelo, Tipo.valueOf(tipo)));
-                    System.out.println(estacionamento.);
+                    //mostra entrada do veículo
+                    estacionamento.pesquisaVeiculo(placaEntrada);
                     break;
 
                 case 2:
