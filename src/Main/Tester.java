@@ -93,6 +93,7 @@ public class Tester {
                     modelo = modelo.toUpperCase();
                     
                     System.out.println(estacionamento.entraVeiculo(placaEntrada,modelo, Tipo.valueOf(tipo)));
+                    System.out.println(estacionamento.);
                     break;
 
                 case 2:
@@ -112,6 +113,7 @@ public class Tester {
 
                     System.out.print("Valor a pagar: R$");
                     System.out.println(estacionamento.saiVeiculo(placaSaida));
+                    
                     
                     break;
 

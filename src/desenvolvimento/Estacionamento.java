@@ -65,7 +65,7 @@ public class Estacionamento {
                 //Inserindo moto
                 }else if(tipo.equals(Tipo.MOTO)){//Avalia se o veículo é uma Moto
                 if(getNumCarro()<vagaMoto.length){
-                  Automovel moto = new Automovel(placa, modelo, Tipo.MOTO);
+                  Motocicleta moto = new Motocicleta(placa, modelo, Tipo.MOTO);
                   for(int m=0; m <this.vagaMoto.length; m++){
                        if(this.vagaMoto[m] == null){
                         this.vagaMoto[m] = moto;
@@ -94,19 +94,34 @@ public class Estacionamento {
             }
         }
 
-        private float calculaConta(int g, int l){
+        private float calculaConta(int posicao, int codTipo){
             float total = 0;
-            if (this.vaga[g][l] != null){
+            if( codTipo == 1){
+                if(this.vagaCarro[posicao] != null){
                 Date data = new Date();
                 @SuppressWarnings("deprecation")
                 int horaAtual = data.getHours();
-                int tempo = horaAtual - this.vaga[g][l].getHora();
+                int tempo = horaAtual - this.vagaCarro[posicao].getHora();
                 if (tempo <= 1) {
-                    total = (float) this.vaga[g][l].getCustoInicial();
+                    total = (float) this.vagaCarro[posicao].getCustoInicial();
                 } else {
-                    total = (float) (((tempo - 1) * this.vaga[g][l].getCustoAdicional()) + this.vaga[g][l].getCustoInicial());
+                    total = (float) (((tempo - 1) * this.vagaCarro[posicao].getCustoAdicional()) + this.vagaCarro[posicao].getCustoInicial());
+                }  
+                }
+            }else if (codTipo == 2){
+                if(this.vagaMoto[posicao] != null){
+                Date data = new Date();
+                @SuppressWarnings("deprecation")
+                int horaAtual = data.getHours();
+                int tempo = horaAtual - this.vagaMoto[posicao].getHora();
+                if (tempo <= 1) {
+                    total = (float) this.vagaMoto[posicao].getCustoInicial();
+                } else {
+                    total = (float) (((tempo - 1) * this.vagaMoto[posicao].getCustoAdicional()) + this.vagaMoto[posicao].getCustoInicial());
+                }  
                 }
             }
+            
             return total;
         }
 
@@ -116,7 +131,7 @@ public class Estacionamento {
             for (int a=0; a < this.vagaCarro.length; a++){
                 if (this.vagaCarro[a] != null){
                     if (placa.equals(this.vagaCarro[a].getPlaca())){
-                        conta = calculaConta(a);
+                        conta = calculaConta(a, 1);
                         removeVeiculo(a, 1);
                         return conta;
                     }
@@ -126,7 +141,7 @@ public class Estacionamento {
             for (int m=0; m < this.vagaMoto.length; m++){
                 if (this.vagaMoto[m] != null){
                     if (placa.equals(this.vagaMoto[m].getPlaca())){
-                        conta = calculaConta(m);
+                        conta = calculaConta(m, 2);
                         removeVeiculo(m, 2);
                         return conta;
                     }
