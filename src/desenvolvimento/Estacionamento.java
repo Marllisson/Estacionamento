@@ -74,17 +74,16 @@ public class Estacionamento {
                        }
                     }
                    
-                   }
+                   }else{
+                    System.out.println("Estacionamento Moto Lotado");
+                    return false;
                 
                 }
-                
+                }
                 return false;
 
-            
         }
         
-
-
         private void removeVeiculo(int posicao, int codTipo){
             if (codTipo == 1 ){
                 this.vagaCarro[posicao] = null;
